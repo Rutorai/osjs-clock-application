@@ -1,0 +1,61 @@
+{
+  "name": "@osjs/clock-application",
+  "version": "1.0.0",
+  "description": "OS.js v3 Clock application",
+  "files": [
+    "dist/",
+    "metadata.json"
+  ],
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "eslint": "eslint *.js",
+    "stylelint": "stylelint index.scss",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prepublishOnly": "npm run test && rm -rf ./dist/* && NODE_ENV=production npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rutorai/osjs-clock-application.git"
+  },
+  "keywords": [
+    "osjs"
+  ],
+  "dependencies": {
+    "@osjs/gui": "^4.0.33",
+    "url-loader": "^4.1.0"
+  },
+  "devDependencies": {
+    "@osjs/dev-meta": "^1.0.2"
+  },
+  "author": "Rutorai <rutorai.pf@yandex.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Rutorai/osjs-clock-application/issues"
+  },
+  "homepage": "https://github.com/Rutorai/osjs-clock-application#readme",
+  "osjs": {
+    "type": "package"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@osjs/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@osjs/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  }
+}

@@ -1,0 +1,125 @@
+.osjs-clock-content {
+  margin: 5px;
+  overflow: hidden;
+  font-size: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgrey;
+  background-image: url('./images/topography.svg');
+  color: #746482;
+}
+
+.clock {
+  position: relative;
+  width: 1em;
+  height: 1em;
+  background: white;
+  border: 0.05em solid currentColor;
+  box-sizing: border-box;
+  border-radius: 50%;
+  box-shadow:
+    0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5),
+    inset 0 0 0 0.025em white,
+    inset 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.5),
+    inset 0.5em 0.5em 1em rgba(0, 0, 0, 0.1);
+  counter-reset: tick;
+}
+
+@keyframes rotatePin {
+  from {
+    transform: rotate(0.5turn);
+  }
+
+  to {
+    transform: rotate(1.5turn);
+  }
+}
+
+.pin {
+  content: '';
+  width: var(--width);
+  height: var(--height);
+  background-color: currentColor;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: calc(50% - var(--width) / 2);
+  border-bottom-left-radius: 100% 80%;
+  border-bottom-right-radius: 100% 80%;
+  border: 0.001em solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+  transform-origin: top center;
+  animation: rotatePin var(--period) infinite linear;
+  animation-delay: calc(-1s * var(--delay));
+}
+
+.pin.hourhand {
+  color: gray;
+
+  --width: 0.035em;
+  --height: 0.2em;
+  --period: 43200s;
+}
+
+.pin.minutehand {
+  color: #574664;
+
+  --width: 0.02em;
+  --height: 0.35em;
+  --period: 3600s;
+}
+
+.pin.secondhand {
+  --width: 0.015em;
+  --height: 0.4em;
+  --period: 60s;
+}
+
+.clock .pin::before,
+.clock .pin::after {
+  position: absolute;
+  display: block;
+  content: '';
+  background-color: inherit;
+  border-radius: 50%;
+}
+
+.clock .pin::before {
+  width: calc(2 * var(--width));
+  height: calc(2 * var(--width));
+  top: calc(-1 * var(--width));
+  left: calc(-0.5 * var(--width));
+}
+
+.clock .pin::after {
+  width: 100%;
+  height: calc(2 * var(--width));
+  top: calc(-2 * var(--width));
+}
+
+/* Ticks */
+.clock .tick {
+  position: absolute;
+  opacity: 0.25;
+  top: 50%;
+  left: 50%;
+  height: 0.4em;
+  transform-origin: top center;
+  transform: rotate(calc(0.5turn + 1turn / 12 * var(--count)));
+  counter-increment: tick;
+}
+
+.clock .tick::before {
+  position: absolute;
+  display: block;
+  font-size: 8%;
+  top: calc(100% - 0.8em);
+  transform: translateX(-40%) rotate(0.5turn);
+  text-align: center;
+  content: counter(tick, upper-roman);
+}
+
+.clock .tick:nth-child(3n) {
+  opacity: 0.8;
+}

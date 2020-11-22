@@ -1,0 +1,7 @@
+# NPM
+/dist
+/node_modules
+package-lock.json
+
+# IDE Intellij
+.idea
